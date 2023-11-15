@@ -117,7 +117,7 @@ const Home = () => {
                             style={{
                                 width: 20,
                                 height: 20,
-                                backgroundColor: grid[i][k] ? "pink" : undefined,
+                                backgroundColor: grid[i][k] ? "gray" : undefined,
                                 border: "solid 1px black"
                             }}
                         />
