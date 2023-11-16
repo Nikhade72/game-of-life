@@ -1,5 +1,6 @@
 import { produce } from 'immer';
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react';
+import style from './home.module.css';
 
 const numRows = 100;
 const numCols = 100;
@@ -24,6 +25,10 @@ const generateEmptyGrid = () => {
     return rows;
 }
 
+const buttonStyle = {
+    marginBottom: '10px',
+};
+
 const Home = () => {
     const [grid, setGrid] = useState(() => {
         return generateEmptyGrid()
@@ -44,7 +49,7 @@ const Home = () => {
                     for (let k = 0; k < numCols; k++) {
                         let neighbors = 0;
                         operations.forEach(([x, y]) => {
-                            const newI = i + x; 
+                            const newI = i + x;
                             const newK = k + y;
                             if (newI >= 0 && newI < numRows && newK >= 0 && newK < numCols) {
                                 neighbors += g[newI][newK]
@@ -67,7 +72,10 @@ const Home = () => {
 
     return (
         <>
-            <button
+            <div>
+                <h3>Game of life</h3>
+            </div>
+            {/* <button
                 onClick={() => {
                     setRunning(!running);
                     if (!running) {
@@ -77,9 +85,23 @@ const Home = () => {
                 }}
             >
                 {running ? 'stop' : 'start'}
+            </button> */}
+            <button
+                style={{ ...buttonStyle, marginBottom: '10px' }}
+                onClick={() => {
+                    setRunning(!running);
+                    if (!running) {
+                        runningRef.current = true;
+                        runSimulation();
+                    }
+                }}
+            >
+                {running ? 'Stop' : 'Start'}
             </button>
 
+
             <button
+            style={{ ...buttonStyle, marginBottom: '10px' }}
                 onClick={() => {
                     const rows = [];
                     for (let i = 0; i < numRows; i++) {
@@ -94,7 +116,9 @@ const Home = () => {
                 random
             </button>
 
-            <button onClick={() => {
+            <button
+            style={{ ...buttonStyle, marginBottom: '10px' }}
+            onClick={() => {
                 setGrid(generateEmptyGrid());
             }}>
                 clear
